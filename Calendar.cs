@@ -881,3 +881,5 @@ public class Calendar
 // todo: fix extra space on the right
 // todo: check that min width is 131 and min height is 51
 // todo: vim-mode
+// todo: moon-phase
+// todo: national holidays

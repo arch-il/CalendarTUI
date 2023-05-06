@@ -11,13 +11,6 @@ public static class GraphicsManager
 	// function for initializing graphics
 	public static void InitializeGraphics()
 	{
-		// set window size
-		Console.SetWindowSize(width,   height);
-		Console.SetBufferSize(width+2, height);
-		// fix window issues
-		FixWindowsSizeIssues.FixResizeIssues();
-		FixWindowsSizeIssues.FixScrollBarIssues();
-
 		// hide cursor
 		Console.CursorVisible = false;
 	}
