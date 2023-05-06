@@ -5,20 +5,69 @@ namespace CalendarTUI.TerminalGraphics;
 public static class GraphicsManager
 {
 	// window size
-	public const int width  = 126 + 5 + 28;
-		public const int height = 50 + 1;
+	public static int width  = 0;
+	public static int height = 0;
 
 	// function for initializing graphics
 	public static void InitializeGraphics()
 	{
 		// hide cursor
 		Console.CursorVisible = false;
+
+		// update dimensions
+		width = Console.WindowWidth-1;
+		height = Console.WindowHeight-1;
+
+		// update window size 
+		Update();
 	}
 
-	public static void Clear()
+
+	// update window size
+	public static bool Update()
 	{
-		// draw rectangle size of entire screen
-		DrawRect(0, 0, width, height, ConsoleColor.Black);
+		// check that window is big enough
+		if (Console.WindowWidth < 132 || Console.WindowHeight < 51)
+		{
+			// clear screen
+			Console.Clear();
+			// write error message
+			DrawText(
+				"Window size needs to be at least 132x51",
+				ConsoleColor.Gray,
+				ConsoleColor.DarkRed,
+				0,
+				0);
+			
+			// dont exit before window is appropriate size
+			while (Console.WindowWidth < 132 || Console.WindowHeight < 51);
+			
+			// clear screen
+			Console.Clear();
+
+			// update dimesions
+			width = Console.WindowWidth-1;
+			height = Console.WindowHeight-1;
+
+			// ask program to redraw calendar
+			return true;
+		}
+
+		if (Console.WindowWidth-1 != width || Console.WindowHeight-1 != height)
+		{
+			// update dimesions
+			width = Console.WindowWidth-1;
+			height = Console.WindowHeight-1;
+			
+			// clear screen
+			Console.Clear();
+
+			// ask program to redraw calendar
+			return true;
+		}
+
+		// dont redraw anything
+		return false;
 	}
 
 	// function for drawing text using color and position

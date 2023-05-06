@@ -6,6 +6,7 @@ public class Program
 {
 	static void Main(string[] args)
 	{
+
 		// initialize Graphics
 		GraphicsManager.InitializeGraphics();
 
@@ -19,7 +20,7 @@ public class Program
 		while (true)
 		{
 			// check if anything has been updated
-			if (calendar.Update())
+			if (GraphicsManager.Update() || calendar.Update())
 				// draw calendar
 				calendar.Draw();
 		}

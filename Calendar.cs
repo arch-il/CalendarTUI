@@ -50,7 +50,7 @@ public class Calendar
 		// set end date a week later
 		endDate = startDate.AddDays(7);
 		// set cursor position to today
-		cursorPosition = (int)DateTime.Today.DayOfWeek - (int)DayOfWeek.Monday;
+		cursorPosition = (int)DateTime.Today.DayOfWeek - (int)DayOfWeek.Monday + 1;
 		// update time margins
 		for (int i = 0; i < events.Count; i++)
 			events[i].timingOptions.UpdateTimeMargins(startDate, endDate);
@@ -288,7 +288,7 @@ public class Calendar
 	public void Draw()
 	{
 		// clear screen
-		GraphicsManager.Clear();
+		Console.Clear();
 
 		// draw main calendar
 		DrawCalendar();
@@ -315,21 +315,24 @@ public class Calendar
 		// draw frame around logo
 		GraphicsManager.DrawText("|", ConsoleColor.DarkGray, ConsoleColor.Black, 5, 0);
 		GraphicsManager.DrawText("-----", ConsoleColor.DarkGray, ConsoleColor.Black, 0, 1);
-		// draw line at the end
-		GraphicsManager.DrawText("-----", ConsoleColor.DarkGray, ConsoleColor.Black, 0, GraphicsManager.height-1);
 
 		// draw frame
 		GraphicsManager.DrawRectFrame(
 			borderLeft,
 			borderTop,
 			GraphicsManager.width - borderLeft - borderRight,
-			48+2,
+			GraphicsManager.height - borderTop - borderBottom,
 			ConsoleColor.Black,
 			ConsoleColor.DarkGray
 		);
 
 		// draw times
-		for (int j = 0; j < 48; j++)
+		// temp date
+		DateTime tempTime = new DateTime(1, 1, 1, 0, 0, 0);
+		// calculate minute increment
+		double increment = 1440.0 / (GraphicsManager.height - borderTop - borderBottom - 2);
+		// cycle thru dates
+		for (int j = 0; j < GraphicsManager.height - borderTop - borderBottom - 1; j++)
 		{
 			if (j == 2*DateTime.Now.Hour + DateTime.Now.Minute/30)
 			{
@@ -337,22 +340,24 @@ public class Calendar
 				cursorY = borderTop + 1 + j;
 				// draw time one the side of the screen
 				GraphicsManager.DrawText(
-					$"{(j / 2 < 10 ? $"0{j/2}" : $"{j/2}")}:{(j % 2 == 0 ? "00" : "30")}",
+					tempTime.AddMinutes(increment*j).ToString("HH:mm"),
 					ConsoleColor.Gray,
 					ConsoleColor.DarkRed,
 					0,
 					borderTop + 1 + j
 				);
-				continue;
 			}
-			// draw time one the side of the screen
-			GraphicsManager.DrawText(
-				$"{(j / 2 < 10 ? $"0{j/2}" : $"{j/2}")}:{(j % 2 == 0 ? "00" : "30")}",
-				ConsoleColor.DarkGray,
-				ConsoleColor.Black,
-				0,
-				borderTop + 1 + j
-			);
+			else
+			{
+				// draw time one the side of the screen
+				GraphicsManager.DrawText(
+					tempTime.AddMinutes(increment*j).ToString("HH:mm"),
+					ConsoleColor.DarkGray,
+					ConsoleColor.Black,
+					0,
+					borderTop + 1 + j
+				);
+			}
 		}
 
 		// draw day segments
@@ -387,9 +392,9 @@ public class Calendar
 				// draw cursor frame
 				GraphicsManager.DrawRectFrame(
 					borderLeft + i * (GraphicsManager.width - borderLeft - borderRight)/segmentCount,
-					borderTop, 
+					borderTop,
 					(GraphicsManager.width - borderLeft - borderRight)/segmentCount, 
-					48 + 2,
+					GraphicsManager.height - borderTop - borderBottom,
 					ConsoleColor.Black,
 					ConsoleColor.DarkGreen
 				);
@@ -403,9 +408,9 @@ public class Calendar
 			{
 				// save temp numbers
 				int x = borderLeft + 1 + (timeMargin.Item1 - startDate).Days * (GraphicsManager.width - borderLeft - borderRight)/segmentCount;
-				int y = borderTop + 1 + 2*timeMargin.Item1.Hour + (int)Math.Round(timeMargin.Item1.Minute / 30.0);
+				int y = borderTop + 1 + (int)(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
 				int width = (GraphicsManager.width - borderLeft - borderRight)/segmentCount - 2;
-				int height = 2*timeMargin.Item2.Hour + (int)Math.Round(timeMargin.Item2.Minute/30.0) - 2*timeMargin.Item1.Hour - (int)Math.Round(timeMargin.Item1.Minute/30.0);
+				int height = (int)((timeMargin.Item2.TimeOfDay - timeMargin.Item1.TimeOfDay).TotalMinutes / increment);
 				
 				// check if cursor is on top of this event
 				if (cursorX >= x && cursorX < x + width &&
@@ -453,9 +458,9 @@ public class Calendar
 
 				// save temp numbers
 				int x = borderLeft + 1 + (timeMargin.Item1 - startDate).Days * (GraphicsManager.width - borderLeft - borderRight)/segmentCount;
-				int y = borderTop + 1 + 2*timeMargin.Item1.Hour + (int)Math.Round(timeMargin.Item1.Minute / 30.0);
+				int y = borderTop + 1 + (int)(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
 				int width = (GraphicsManager.width - borderLeft - borderRight)/segmentCount - 2;
-				int height = 2*timeMargin.Item2.Hour + (int)Math.Round(timeMargin.Item2.Minute/30.0) - 2*timeMargin.Item1.Hour - (int)Math.Round(timeMargin.Item1.Minute/30.0);
+				int height = (int)((timeMargin.Item2.TimeOfDay - timeMargin.Item1.TimeOfDay).TotalMinutes / increment);
 				
 			// draw arrows on sides
 			for (int i = 0; i < height; i++)
@@ -867,6 +872,7 @@ public class Calendar
 // ! issues:
 
 // todo:
+// check minimum screen width
 // todo: add tasks
 // todo: move to seperate classes
 // todo: get lambda call of what to redraw
