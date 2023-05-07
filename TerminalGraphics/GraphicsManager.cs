@@ -1,4 +1,5 @@
 using CalendarTUI.Miscellaneous;
+using CalendarTUI.Modules;
 
 namespace CalendarTUI.TerminalGraphics;
 
@@ -35,7 +36,7 @@ public static class GraphicsManager
 			DrawText(
 				"Window size needs to be at least 132x51",
 				ConsoleColor.Gray,
-				ConsoleColor.DarkRed,
+				ConsoleColor.Black,
 				0,
 				0);
 			
@@ -44,6 +45,10 @@ public static class GraphicsManager
 			
 			// clear screen
 			Console.Clear();
+
+			// notify program that size has changed
+			MainCalendar.QueueEveryDraw();
+			MainCalendar.UpdateIncrement();
 
 			// update dimesions
 			width = Console.WindowWidth-1;
@@ -61,6 +66,10 @@ public static class GraphicsManager
 			
 			// clear screen
 			Console.Clear();
+
+			// notify program that size has changed
+			MainCalendar.QueueEveryDraw();
+			MainCalendar.UpdateIncrement();
 
 			// ask program to redraw calendar
 			return true;
