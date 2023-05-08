@@ -127,6 +127,9 @@ public static class Details
 		// increment line counter
 		lineCounter++;
 
+		// increment line counter again for empty space
+		lineCounter++;
+
 		// draw start time
 		GraphicsManager.DrawText(
 			$"From: {savedEvent.timingOptions.eventStartDate.ToString("HH:mm")}",
@@ -215,7 +218,7 @@ public static class Details
 		// increment line counter
 		lineCounter++;
 
-		// draw repetiton days //todo: T T is same tue thu
+		// draw repetiton days
 		// get temporary message
 		tempMessage = "";
 		switch (savedEvent.timingOptions.repeatType)
@@ -224,7 +227,7 @@ public static class Details
 			{
 				// cycle thru dates
 				foreach (var date in savedEvent.timingOptions.selectedDates)
-					tempMessage += Enum.GetName(typeof(DayOfWeek), date.DayOfWeek)[0] + ", ";
+					tempMessage += Enum.GetName(typeof(DayOfWeek), date.DayOfWeek).Substring(0, 3).ToUpper() + ", ";
 				// remove last 2 characters
 				tempMessage = tempMessage.Substring(0, tempMessage.Length-2);
 				break;
