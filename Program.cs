@@ -41,6 +41,8 @@ public class Program
 //! fix weekdays in repetition type in details module
 
 // todo:
+// todo: fixed number times (15, 30, increment)
+
 // todo: remove magic numbers (add const numbers) 
 // todo: make drawing more efficient (move every calculation to update)
 
@@ -51,11 +53,7 @@ public class Program
 
 // todo: add tasks
 
-// todo: add values to events (occupancy, exclude dates)
-// todo: current event view under details
-
-// todo: clock on top of calendar
-// todo: moon-phase
+// todo: add exclude days to events
 
 // todo: full day events (above calendar displayed in list)
 // todo: national holidays
