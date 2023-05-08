@@ -33,11 +33,7 @@ public class Program
 
 
 //? inprogress:
-// todo: add modules
-	// todo: current event
-// todo: make drawing more efficient
-	// todo: implement clearing section of screen
-		// todo: details
+// todo: fix details module
 
 // ! issues:
 //! make current time indicator cursor moving
@@ -45,6 +41,8 @@ public class Program
 
 
 // todo:
+// todo: make drawing more efficient (move every calculation to update)
+
 // todo: update comments
 
 // todo: add settings.json

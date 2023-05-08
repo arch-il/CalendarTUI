@@ -10,6 +10,7 @@ public static class CurrentEvent
 	private static string eventTitle = "";     // even title
 	private static string eventStartTime = ""; // event start time
 	private static string eventEndTime = "";   // event end time
+	private static string timeLeft = "";       // time left before event is over
 
 
 	// list of things to redraw
@@ -39,6 +40,7 @@ public static class CurrentEvent
 			eventTitle = "";
 			eventStartTime = "";
 			eventEndTime = "";
+			timeLeft = "";
 
 			// cycle thru each event
 			foreach (var tempEvent in MainCalendar.events)
@@ -54,6 +56,22 @@ public static class CurrentEvent
 						eventTitle = tempEvent.title;
 						eventStartTime = timeMargin.Item1.ToString("HH:mm");
 						eventEndTime = timeMargin.Item2.ToString("HH:mm");
+						// temporarily save time difference
+						TimeSpan diff = timeMargin.Item2 - DateTime.Now; 
+						// check if there is hours to display
+						if (diff.Hours > 0) 
+						{
+							// check if there is more than one hour
+							if (diff.Hours > 1) timeLeft += $"{diff.Hours} hrs ";
+							else timeLeft += $"{diff.Hours} hr ";
+						}
+						// check if there is minute ti display
+						if (diff.Minutes > 0) 
+						{
+							// check if there is more than one minute
+							if (diff.Minutes > 1) timeLeft += $"{diff.Minutes} mins";
+							else timeLeft += $"{diff.Minutes} min";
+						}
 
 						break;
 					}
@@ -93,7 +111,7 @@ public static class CurrentEvent
 			GraphicsManager.width - Calendar.borderRight + 1,
 			5,
 			Calendar.borderRight,
-			5,
+			6,
 			ConsoleColor.Black,
 			ConsoleColor.DarkGray
 		);
@@ -120,7 +138,7 @@ public static class CurrentEvent
 			GraphicsManager.width - Calendar.borderRight + 3,
 			6,
 			Calendar.borderRight - 4,
-			3,
+			4,
 			ConsoleColor.Black
 		);
 
@@ -165,6 +183,15 @@ public static class CurrentEvent
 			ConsoleColor.Black,
 			GraphicsManager.width - Calendar.borderRight + 3,
 			8
+		);
+
+		// draw time left
+		GraphicsManager.DrawText(
+			$"Time Left: {timeLeft}",
+			ConsoleColor.Gray,
+			ConsoleColor.Black,
+			GraphicsManager.width - Calendar.borderRight + 3,
+			9
 		);
 	}
 }
