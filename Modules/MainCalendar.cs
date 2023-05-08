@@ -33,10 +33,6 @@ public static class MainCalendar
 	public static ConsoleColor cursorForegroundColor = ConsoleColor.DarkRed; // cursor colors
 	public static ConsoleColor cursorBackgroundColor = ConsoleColor.Black;
 
-	// window size during previous draw call
-	public static int prevWidth = 0;
-	public static int prevHeight = 0;
-
 	// list of things to redraw
 	public static List<Action> drawCalls = new List<Action>();
 	
@@ -70,15 +66,12 @@ public static class MainCalendar
 		UpdateSelectedEvent();
 		// update increment
 		UpdateIncrement();
-		// update previous window size
-		prevWidth = GraphicsManager.width;
-		prevHeight = GraphicsManager.height;
 
 		// add every function to draw calls
 		QueueEveryDraw();
 	}
 	
-	// update input
+	// update using input
 	public static bool Update(ConsoleKey key)
 	{
 		switch(key)
@@ -412,10 +405,6 @@ public static class MainCalendar
 			drawCall();
 		// clear draw call list
 		drawCalls.Clear();
-
-		// update previous window size
-		prevWidth = GraphicsManager.width;
-		prevHeight = GraphicsManager.height;
 	}
 
 	// redraw everything on screen
@@ -499,7 +488,7 @@ public static class MainCalendar
 	{
 		// clear previously drawn area
 		GraphicsManager.DrawText(
-			new string(' ', prevWidth - Calendar.borderLeft - Calendar.borderRight - 2),
+			new string(' ', GraphicsManager.width - Calendar.borderLeft - Calendar.borderRight - 2),
 			ConsoleColor.Black,
 			ConsoleColor.Black,
 			Calendar.borderLeft + 1,

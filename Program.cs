@@ -13,6 +13,9 @@ public class Program
 		// initialize calendar
 		Calendar.Initialize("events.json");
 
+		// clear screen before starting drawing
+		Console.Clear();
+
 		// manually draw first time
 		Calendar.Draw();
 		
@@ -38,26 +41,23 @@ public class Program
 //? inprogress:
 // todo: make drawing more efficient
 	// todo: implement clearing section of screen
-		// todo: month calendar
 		// todo: details
 
 // ! issues:
 
 // todo:
 // todo: update comments
+
 // todo: add settings.json
-// todo: add tasks
-// todo: get lambda call of what to redraw
-// todo: add [] around dates in calendar and main view
-// todo: full day events (above calendar displayed in list)
-// todo: add occupancy: (with color)
-// todo: add exclude option and few others
-// todo: add events
-// todo: current event view under details
-// todo: add contacts
-// todo: clock on top of calendar
-// todo: fix extra space on the right
-// todo: check that min width is 131 and min height is 51
 // todo: vim-mode
+
+// todo: add tasks
+
+// todo: add values to events (occupancy, exclude date)
+// todo: current event view under details
+
+// todo: clock on top of calendar
 // todo: moon-phase
+
+// todo: full day events (above calendar displayed in list)
 // todo: national holidays

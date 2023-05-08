@@ -16,7 +16,7 @@ public static class GraphicsManager
 		Console.CursorVisible = false;
 
 		// update dimensions
-		width = Console.WindowWidth-1;
+		width = Console.WindowWidth-2;
 		height = Console.WindowHeight-1;
 
 		// update window size 
@@ -28,7 +28,7 @@ public static class GraphicsManager
 	public static bool Update()
 	{
 		// check that window is big enough
-		if (Console.WindowWidth < 132 || Console.WindowHeight < 51)
+		if (Console.WindowWidth < 133 || Console.WindowHeight < 51)
 		{
 			// clear screen
 			Console.Clear();
@@ -41,24 +41,25 @@ public static class GraphicsManager
 				0);
 			
 			// dont exit before window is appropriate size
-			while (Console.WindowWidth < 132 || Console.WindowHeight < 51);
+			while (Console.WindowWidth < 133 || Console.WindowHeight < 51);
 			
 			// clear screen
 			Console.Clear();
 
 			// notify program that size has changed
 			MainCalendar.QueueEveryDraw();
+			MonthCalendar.QueueEveryDraw();
 			MainCalendar.UpdateIncrement();
 
 			// update dimesions
-			width = Console.WindowWidth-1;
+			width = Console.WindowWidth-2;
 			height = Console.WindowHeight-1;
 
 			// ask program to redraw calendar
 			return true;
 		}
 
-		if (Console.WindowWidth-1 != width || Console.WindowHeight-1 != height)
+		if (Console.WindowWidth-2 != width || Console.WindowHeight-1 != height)
 		{
 			// update dimesions
 			width = Console.WindowWidth-1;
@@ -69,6 +70,7 @@ public static class GraphicsManager
 
 			// notify program that size has changed
 			MainCalendar.QueueEveryDraw();
+			MonthCalendar.QueueEveryDraw();
 			MainCalendar.UpdateIncrement();
 
 			// ask program to redraw calendar

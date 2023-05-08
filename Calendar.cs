@@ -26,8 +26,11 @@ public static class Calendar
 		// parse events from file
 		ReadEventsFromFile();
 
-		// initialize main claendar
+		// initialize main calendar
 		MainCalendar.Initialize();
+
+		// initialize month calendar
+		MonthCalendar.Initialize();
 	}
 
 
@@ -49,12 +52,14 @@ public static class Calendar
 
 				// refresh input //todo:
 				case ConsoleKey.R:
+					// ask program to redraw everything
 					MainCalendar.QueueEveryDraw();
+					MonthCalendar.QueueEveryDraw();
 					return true;
 			}
 			
 			MainCalendar.Update(key.Key);
-			MonthCalendar.Update();
+			MonthCalendar.Update(key.Key);
 			Details.Update();
 	
 			

@@ -7,15 +7,61 @@ public static class MonthCalendar
 	// culture info
 	private static System.Globalization.CultureInfo cultureInfo = new System.Globalization.CultureInfo("de-DE"); // culture info
 
+	// selected date
+	private static DateTime selectedDate = new DateTime(); 
 
-	//?
-	public static void Update()
+	// list of things to redraw
+	public static List<Action> drawCalls = new List<Action>();
+
+	
+	// function to initialize data
+	public static void Initialize()
 	{
-
+		// ask program to draw everything
+		QueueEveryDraw();
 	}
 
-	// function for drawing small month calendar
+
+	// update using input
+	public static void Update(ConsoleKey key)
+	{
+		// check if date has been updated
+		if (selectedDate != MainCalendar.startDate.AddDays(MainCalendar.cursorPosition))
+		{
+			// update date
+			selectedDate = MainCalendar.startDate.AddDays(MainCalendar.cursorPosition);
+
+			// queue required draws
+			drawCalls.Add(DrawTopLabel);
+			drawCalls.Add(DrawDays);
+		}	
+	}
+
+	// function for drawing month calendar
 	public static void Draw()
+	{
+		// draw each segment that is in draw call
+		foreach (var drawCall in drawCalls)
+			drawCall();
+		// clear draw call list
+		drawCalls.Clear();
+	}
+
+	// redraw everything on screen
+	public static void QueueEveryDraw()
+	{
+		// clear draw call list
+		drawCalls.Clear();
+		// add everything
+		drawCalls.Add(DrawFrame);
+		drawCalls.Add(DrawFrameLabel);
+		drawCalls.Add(DrawTopLabel);
+		drawCalls.Add(DrawWeekLabels);
+		drawCalls.Add(DrawDays);
+	}
+
+	// draw frame
+	public static void DrawFrame()
 	{
 		// draw frame
 		GraphicsManager.DrawRectFrame(
@@ -26,7 +72,11 @@ public static class MonthCalendar
 			ConsoleColor.Black,
 			ConsoleColor.DarkGray
 		);
+	}
 
+	// draw calendar label
+	public static void DrawFrameLabel()
+	{
 		// draw calendar label
 		GraphicsManager.DrawText(
 			"Calendar:",
@@ -34,6 +84,28 @@ public static class MonthCalendar
 			ConsoleColor.Black,
 			GraphicsManager.width - Calendar.borderRight + 2,
 			GraphicsManager.height - 11
+		);
+	}
+
+	// draw day month and year
+	public static void DrawTopLabel()
+	{
+		// clear needed space
+		GraphicsManager.DrawText(
+			new string(' ', Calendar.borderRight - 4),
+			ConsoleColor.Black,
+			ConsoleColor.Black,
+			GraphicsManager.width - Calendar.borderRight + 3,
+			GraphicsManager.height - 9
+		);
+
+		// draw day of year
+		GraphicsManager.DrawText(
+			$"D:{cultureInfo.Calendar.GetDayOfYear(MainCalendar.startDate.AddDays(MainCalendar.cursorPosition))}",
+			ConsoleColor.Gray,
+			ConsoleColor.Black,
+			GraphicsManager.width - Calendar.borderRight + 3,
+			GraphicsManager.height - 9
 		);
 
 		// draw current month
@@ -53,16 +125,11 @@ public static class MonthCalendar
 			GraphicsManager.width - 7,
 			GraphicsManager.height - 9
 		);
+	}
 
-		// draw day of year
-		GraphicsManager.DrawText(
-			$"D:{cultureInfo.Calendar.GetDayOfYear(MainCalendar.startDate.AddDays(MainCalendar.cursorPosition))}",
-			ConsoleColor.Gray,
-			ConsoleColor.Black,
-			GraphicsManager.width - Calendar.borderRight + 3,
-			GraphicsManager.height - 9
-		);
-
+	// draw week labels
+	public static void DrawWeekLabels()
+	{
 		// draw week labels
 		GraphicsManager.DrawText(
 			" #|  M  T  W  T  F  S  S",
@@ -70,6 +137,19 @@ public static class MonthCalendar
 			ConsoleColor.Black,
 			GraphicsManager.width - Calendar.borderRight + 3,
 			GraphicsManager.height - 8
+		);
+	}
+
+	// draw days of month
+	public static void DrawDays()
+	{
+		// clear needed space
+		GraphicsManager.DrawRect(
+			GraphicsManager.width - Calendar.borderRight + 3,
+			GraphicsManager.height - 7,
+			Calendar.borderRight - 3,
+			6,
+			ConsoleColor.Black
 		);
 
 		// draw days
@@ -98,6 +178,17 @@ public static class MonthCalendar
 			// draw day by day
 			for (int j = 0; j < 7; j++)
 			{
+				// check if date is selected
+				if (tempDate == MainCalendar.startDate.AddDays(MainCalendar.cursorPosition))
+					// draw box around selected date
+					GraphicsManager.DrawText(
+						"[  ]",
+						ConsoleColor.DarkGreen,
+						ConsoleColor.Black,
+						GraphicsManager.width - Calendar.borderRight + 6 + 3*j,
+						GraphicsManager.height - 7 + i
+					);
+				
 				// save colors to change them
 				ConsoleColor dateForegroundColor = ConsoleColor.White;
 				ConsoleColor dateBackgroundColor = ConsoleColor.Black;
@@ -107,9 +198,6 @@ public static class MonthCalendar
 				// check if date is today
 				if (tempDate == DateTime.Today)
 					dateBackgroundColor = ConsoleColor.DarkRed;
-				// check if date is selected
-				if (tempDate == MainCalendar.startDate.AddDays(MainCalendar.cursorPosition))
-					dateForegroundColor = ConsoleColor.DarkGreen;
 
 				// draw date
 				GraphicsManager.DrawText(
