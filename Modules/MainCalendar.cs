@@ -452,11 +452,12 @@ public static class MainCalendar
 	{
 		// draw times
 		// temp date
-		DateTime tempTime = new DateTime(1, 1, 1, 0, 0, 0);
+		DateTime tempTime = DateTime.Today;
 		// cycle thru dates
 		for (int j = 0; j < GraphicsManager.height - Calendar.borderTop - Calendar.borderBottom - 1; j++)
 		{
-			if (j == 2*DateTime.Now.Hour + DateTime.Now.Minute/30)
+			if (DateTime.Now > tempTime.AddMinutes(increment*j) &&
+				DateTime.Now < tempTime.AddMinutes(increment*(j+1)))
 			{
 				// save cursor y
 				cursorY = Calendar.borderTop + 1 + j;

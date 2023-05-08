@@ -23,7 +23,7 @@ public static class MonthCalendar
 
 
 	// update using input
-	public static void Update(ConsoleKey key)
+	public static void Update()
 	{
 		// check if date has been updated
 		if (selectedDate != MainCalendar.startDate.AddDays(MainCalendar.cursorPosition))

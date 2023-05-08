@@ -25,16 +25,19 @@ public static class GraphicsManager
 
 
 	// update window size
-	public static bool Update()
+	public static void Update()
 	{
 		// check that window is big enough
 		if (Console.WindowWidth < 133 || Console.WindowHeight < 51)
 		{
+			// reset width and height to trigger other if
+			width = height = 0;
+
 			// clear screen
 			Console.Clear();
 			// write error message
 			DrawText(
-				"Window size needs to be at least 132x51",
+				"Window size needs to be at least 133x51",
 				ConsoleColor.Gray,
 				ConsoleColor.Black,
 				0,
@@ -42,27 +45,12 @@ public static class GraphicsManager
 			
 			// dont exit before window is appropriate size
 			while (Console.WindowWidth < 133 || Console.WindowHeight < 51);
-			
-			// clear screen
-			Console.Clear();
-
-			// notify program that size has changed
-			MainCalendar.QueueEveryDraw();
-			MonthCalendar.QueueEveryDraw();
-			MainCalendar.UpdateIncrement();
-
-			// update dimesions
-			width = Console.WindowWidth-2;
-			height = Console.WindowHeight-1;
-
-			// ask program to redraw calendar
-			return true;
 		}
 
 		if (Console.WindowWidth-2 != width || Console.WindowHeight-1 != height)
 		{
 			// update dimesions
-			width = Console.WindowWidth-1;
+			width = Console.WindowWidth-2;
 			height = Console.WindowHeight-1;
 			
 			// clear screen
@@ -71,14 +59,9 @@ public static class GraphicsManager
 			// notify program that size has changed
 			MainCalendar.QueueEveryDraw();
 			MonthCalendar.QueueEveryDraw();
+			CurrentTime.QueueEveryDraw();
 			MainCalendar.UpdateIncrement();
-
-			// ask program to redraw calendar
-			return true;
 		}
-
-		// dont redraw anything
-		return false;
 	}
 
 	// function for drawing text using color and position

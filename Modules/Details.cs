@@ -14,6 +14,7 @@ public static class Details
 	// function for drawing details
 	public static void Draw()
 	{
+		return;
 		// draw details frame
 		GraphicsManager.DrawRectFrame(
 			GraphicsManager.width - Calendar.borderRight + 1,

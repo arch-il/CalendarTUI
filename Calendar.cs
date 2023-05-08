@@ -15,8 +15,6 @@ public static class Calendar
 	public static int borderBottom = 0; // extra space needed on the bottom side of the screen	
 
 
-	
-
 	// simple constructor
 	public static void Initialize(string filepath)
 	{
@@ -31,11 +29,14 @@ public static class Calendar
 
 		// initialize month calendar
 		MonthCalendar.Initialize();
+
+		// initialize current date
+		CurrentTime.Initialize();
 	}
 
 
 	// function for taking input and updating state
-	public static bool Update()
+	public static void Update()
 	{
 		// check if key is available
 		if (Console.KeyAvailable)
@@ -48,26 +49,31 @@ public static class Calendar
 				// exit input
 				case ConsoleKey.Escape:
 					Environment.Exit(0);
-					return false;
+					return;
 
 				// refresh input //todo:
 				case ConsoleKey.R:
+					// clear screen
+					Console.Clear();
 					// ask program to redraw everything
 					MainCalendar.QueueEveryDraw();
 					MonthCalendar.QueueEveryDraw();
-					return true;
+					CurrentTime.QueueEveryDraw();
+					return;
 			}
 			
+			// call update functions
 			MainCalendar.Update(key.Key);
-			MonthCalendar.Update(key.Key);
+			MonthCalendar.Update();
+			CurrentTime.Update();
 			Details.Update();
 	
-			
-			// return update status true
-			return true;
+			// exit
+			return;
 		}
-		// return update status false
-		return false;
+		
+		// current time needs to be updated anyways
+		CurrentTime.Update();
 	}
 
 
@@ -82,6 +88,9 @@ public static class Calendar
 
 		// draw small calendar
 		MonthCalendar.Draw();
+
+		// draw current time
+		CurrentTime.Draw();
 	}
 
 	// function for parsing events form json file

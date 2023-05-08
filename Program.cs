@@ -6,7 +6,6 @@ public class Program
 {
 	static void Main(string[] args)
 	{
-
 		// initialize Graphics
 		GraphicsManager.InitializeGraphics();
 
@@ -23,27 +22,26 @@ public class Program
 		while (true)
 		{
 			// check if window has been updated
-			if (GraphicsManager.Update())
-			{
-				// call calendar update and draw
-				Calendar.Update();
-				Calendar.Draw();
-			}
-			// check if input has been updated
-			else if (Calendar.Update())
-				// call calendar draw
-				Calendar.Draw();
+			GraphicsManager.Update();
+			// check user input update
+			Calendar.Update();
+			// draw modules
+			Calendar.Draw();
 		}
 	}
 }
 
 
 //? inprogress:
+// todo: add modules
+	// todo: Clock/Date:
 // todo: make drawing more efficient
 	// todo: implement clearing section of screen
 		// todo: details
 
 // ! issues:
+//! make drawCalls private
+//! gap between events changes
 
 // todo:
 // todo: update comments
@@ -53,7 +51,7 @@ public class Program
 
 // todo: add tasks
 
-// todo: add values to events (occupancy, exclude date)
+// todo: add values to events (occupancy, exclude dates)
 // todo: current event view under details
 
 // todo: clock on top of calendar

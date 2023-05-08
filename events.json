@@ -21,7 +21,7 @@
 		"timingOptions": {
 			"timeMargins": [],
 			"eventStartDate": "2023-01-05T07:40:00",
-			"eventEndDate": "2023-06-16T08:50:00",
+			"eventEndDate": "2023-06-16T09:00:00",
 			"isFullDay": false,
 			"repeatType": 2,
 			"selectedDates": [
@@ -60,7 +60,7 @@
 		"description": "This is the time when I am preparing and going to go swimming.",
 		"timingOptions": {
 			"timeMargins": [],
-			"eventStartDate": "2023-05-12T18:00:00",
+			"eventStartDate": "2023-05-09T18:00:00",
 			"eventEndDate": "2023-07-01T18:50:00",
 			"isFullDay": false,
 			"repeatType": 2,
@@ -77,54 +77,13 @@
 		"description": "This is the time when I am swimming.",
 		"timingOptions": {
 			"timeMargins": [],
-			"eventStartDate": "2023-05-12T19:00:00",
+			"eventStartDate": "2023-05-09T19:00:00",
 			"eventEndDate": "2023-07-01T20:00:00",
 			"isFullDay": false,
 			"repeatType": 2,
 			"selectedDates": [
 				"2023-05-12T00:00:00",
 				"2023-05-16T00:00:00"
-			]
-		}
-	},
-
-
-
-
-	{
-		"title": "test1",
-		"backgroundColor": 9,
-		"foregroundColor": 0,
-		"description": "This is the time when I am swimming.",
-		"timingOptions": {
-			"timeMargins": [],
-			"eventStartDate": "2023-05-12T20:00:00",
-			"eventEndDate": "2023-07-01T21:00:00",
-			"isFullDay": false,
-			"repeatType": 3,
-			"selectedDates": [
-				"2023-05-12T00:00:00",
-				"2023-05-16T00:00:00"
-			]
-		}
-	},
-	{
-		"title": "test2",
-		"backgroundColor": 9,
-		"foregroundColor": 0,
-		"description": "This is the time when I am swimming.",
-		"timingOptions": {
-			"timeMargins": [],
-			"eventStartDate": "2023-05-12T21:00:00",
-			"eventEndDate": "2023-07-01T22:00:00",
-			"isFullDay": false,
-			"repeatType": 4,
-			"selectedDates": [
-				"2023-05-12T00:00:00",
-				"2023-05-16T00:00:00",
-				"2023-05-17T00:00:00",
-				"2023-05-18T00:00:00",
-				"2023-05-19T00:00:00"
 			]
 		}
 	}
