@@ -667,8 +667,8 @@ public static class MainCalendar
 			int x = Calendar.borderLeft + 1 + (timeMargin.Item1 - startDate).Days * (GraphicsManager.width - Calendar.borderLeft - Calendar.borderRight)/segmentCount;
 			int y = Calendar.borderTop + 1 + (int)(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
 			int width = (GraphicsManager.width - Calendar.borderLeft - Calendar.borderRight)/segmentCount - 2;
-			int height = (int)((timeMargin.Item2.TimeOfDay - timeMargin.Item1.TimeOfDay).TotalMinutes / increment);
-				
+			int height = (int)Math.Round((timeMargin.Item2.TimeOfDay - timeMargin.Item1.TimeOfDay).TotalMinutes / increment);
+					
 			// draw arrows on sides
 			for (int i = 0; i < height; i++)
 			{
