@@ -109,11 +109,31 @@ public static class Calendar
 	// function for parsing events form json file
 	public static void ReadEventsFromFile()
 	{
-		// read events from file
-		using (StreamReader sr = new StreamReader(filePath))
-			MainCalendar.events = JsonSerializer.Deserialize<List<EventNode>>(sr.ReadToEnd());
-		// sort events using start time
-		MainCalendar.events.Sort((a, b) => a.timingOptions.eventStartDate.ToString("HH:mm").CompareTo(b.timingOptions.eventStartDate.ToString("HH:mm")));
+		try
+		{
+			// read events from file
+			using (StreamReader sr = new StreamReader(filePath))
+				MainCalendar.events = JsonSerializer.Deserialize<List<EventNode>>(sr.ReadToEnd());
+			// sort events using start time
+			MainCalendar.events.Sort((a, b) => a.timingOptions.eventStartDate.ToString("HH:mm").CompareTo(b.timingOptions.eventStartDate.ToString("HH:mm")));
+		}
+		catch (Exception ex)
+		{
+			// clear screen
+			Console.Clear();
+
+			// notify user that parsing json failed
+			Console.SetCursorPosition(0, 0);
+			Console.WriteLine($"Something went wrong wile reading from json file!");
+			Console.WriteLine(ex.Message);
+
+			// wait for user input
+			Console.Write("Press enter for exit...");
+			Console.ReadLine();
+
+			// exit program
+			Environment.Exit(1);
+		}
 	}
 
 	// function for parsing events into json file
