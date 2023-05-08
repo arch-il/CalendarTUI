@@ -17,7 +17,7 @@ public static class GraphicsManager
 
 		// update dimensions
 		width = Console.WindowWidth-2;
-		height = Console.WindowHeight-1;
+		height = Console.WindowHeight;
 
 		// update window size 
 		Update();
@@ -47,11 +47,11 @@ public static class GraphicsManager
 			while (Console.WindowWidth < 133 || Console.WindowHeight < 51);
 		}
 
-		if (Console.WindowWidth-2 != width || Console.WindowHeight-1 != height)
+		if (Console.WindowWidth-2 != width || Console.WindowHeight != height)
 		{
 			// update dimesions
 			width = Console.WindowWidth-2;
-			height = Console.WindowHeight-1;
+			height = Console.WindowHeight;
 			
 			// clear screen
 			Console.Clear();

@@ -41,6 +41,7 @@ public class Program
 
 
 // todo:
+// todo: remove magic numbers (add const numbers)
 // todo: make drawing more efficient (move every calculation to update)
 
 // todo: update comments
