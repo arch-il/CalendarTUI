@@ -5,10 +5,10 @@ namespace CalendarTUI.Modules;
 public static class CurrentTime
 {
 	// saved drawn date
-	public static DateTime savedDate;
+	private static DateTime savedDate;
 
 	// list of things to redraw
-	public static List<Action> drawCalls = new List<Action>();
+	private static List<Action> drawCalls = new List<Action>();
 
 
 	// initialize data
@@ -24,7 +24,7 @@ public static class CurrentTime
 	// function for updating drawing state
 	public static void Update()
 	{
-		// check if time has changed
+		// check if second has changed
 		if (DateTime.Now.Second != savedDate.Second)
 		{
 			// update saved date
@@ -87,7 +87,7 @@ public static class CurrentTime
 	public static void DrawTimeAndDate()
 	{
 		// clearing is not needed here
-		
+
 		// draw time
 		GraphicsManager.DrawText(
 			savedDate.ToString("HH:mm:ss"),

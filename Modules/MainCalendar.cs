@@ -34,7 +34,7 @@ public static class MainCalendar
 	public static ConsoleColor cursorBackgroundColor = ConsoleColor.Black;
 
 	// list of things to redraw
-	public static List<Action> drawCalls = new List<Action>();
+	private static List<Action> drawCalls = new List<Action>();
 	
 
 	// function for initializing data
@@ -61,7 +61,7 @@ public static class MainCalendar
 		
 		// update time margins
 		for (int i = 0; i < events.Count; i++)
-			events[i].timingOptions.UpdateTimeMargins(startDate, endDate);
+			events[i].timingOptions.timeMargins = events[i].timingOptions.GetTimeMargins(startDate, endDate);
 		// update selected event positon
 		UpdateSelectedEvent();
 		// update increment
@@ -389,7 +389,7 @@ public static class MainCalendar
 
 		// update time margins
 		for (int i = 0; i < events.Count; i++)
-			events[i].timingOptions.UpdateTimeMargins(startDate, endDate);
+			events[i].timingOptions.timeMargins = events[i].timingOptions.GetTimeMargins(startDate, endDate);
 		// update selected event
 		UpdateSelectedEvent();
 		// return update status true

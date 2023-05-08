@@ -11,7 +11,7 @@ public static class MonthCalendar
 	private static DateTime selectedDate = new DateTime(); 
 
 	// list of things to redraw
-	public static List<Action> drawCalls = new List<Action>();
+	private static List<Action> drawCalls = new List<Action>();
 
 	
 	// function to initialize data

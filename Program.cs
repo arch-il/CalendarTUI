@@ -34,14 +34,15 @@ public class Program
 
 //? inprogress:
 // todo: add modules
-	// todo: Clock/Date:
+	// todo: current event
 // todo: make drawing more efficient
 	// todo: implement clearing section of screen
 		// todo: details
 
 // ! issues:
-//! make drawCalls private
+//! make current time indicator cursor moving
 //! gap between events changes
+
 
 // todo:
 // todo: update comments

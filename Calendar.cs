@@ -32,6 +32,9 @@ public static class Calendar
 
 		// initialize current date
 		CurrentTime.Initialize();
+
+		// initialize current event
+		CurrentEvent.Initialize();
 	}
 
 
@@ -51,7 +54,7 @@ public static class Calendar
 					Environment.Exit(0);
 					return;
 
-				// refresh input //todo:
+				// refresh input
 				case ConsoleKey.R:
 					// clear screen
 					Console.Clear();
@@ -59,6 +62,7 @@ public static class Calendar
 					MainCalendar.QueueEveryDraw();
 					MonthCalendar.QueueEveryDraw();
 					CurrentTime.QueueEveryDraw();
+					CurrentEvent.QueueEveryDraw();
 					return;
 			}
 			
@@ -66,14 +70,16 @@ public static class Calendar
 			MainCalendar.Update(key.Key);
 			MonthCalendar.Update();
 			CurrentTime.Update();
+			CurrentEvent.Update();
 			Details.Update();
-	
+			
 			// exit
 			return;
 		}
 		
-		// current time needs to be updated anyways
+		// current time and event need to be updated anyways
 		CurrentTime.Update();
+		CurrentEvent.Update();
 	}
 
 
@@ -91,6 +97,9 @@ public static class Calendar
 
 		// draw current time
 		CurrentTime.Draw();
+
+		// draw current event
+		CurrentEvent.Draw();
 	}
 
 	// function for parsing events form json file
