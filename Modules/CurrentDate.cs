@@ -99,10 +99,10 @@ public static class CurrentTime
 
 		// draw date
 		GraphicsManager.DrawText(
-			savedDate.ToString("dd.MM.yy"),
+			savedDate.ToString("ddd dd.MM.yy").ToUpper(),
 			ConsoleColor.Gray,
 			ConsoleColor.Black,
-			GraphicsManager.width - 9,
+			GraphicsManager.width - 13,
 			2
 		);
 	}

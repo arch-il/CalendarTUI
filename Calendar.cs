@@ -35,6 +35,9 @@ public static class Calendar
 
 		// initialize current event
 		CurrentEvent.Initialize();
+
+		// initalize details
+		Details.Initialize();
 	}
 
 
@@ -63,6 +66,7 @@ public static class Calendar
 					MonthCalendar.QueueEveryDraw();
 					CurrentTime.QueueEveryDraw();
 					CurrentEvent.QueueEveryDraw();
+					Details.QueueEveryDraw();
 					return;
 			}
 			
@@ -89,9 +93,6 @@ public static class Calendar
 		// draw main calendar
 		MainCalendar.Draw();
 
-		// draw details
-		Details.Draw();
-
 		// draw small calendar
 		MonthCalendar.Draw();
 
@@ -100,6 +101,9 @@ public static class Calendar
 
 		// draw current event
 		CurrentEvent.Draw();
+		
+		// draw details
+		Details.Draw();
 	}
 
 	// function for parsing events form json file

@@ -33,15 +33,14 @@ public class Program
 
 
 //? inprogress:
-// todo: fix details module
 
 // ! issues:
 //! make current time indicator cursor moving
 //! gap between events changes
-
+//! fix weekdays in repetition type in details module
 
 // todo:
-// todo: remove magic numbers (add const numbers)
+// todo: remove magic numbers (add const numbers) 
 // todo: make drawing more efficient (move every calculation to update)
 
 // todo: update comments

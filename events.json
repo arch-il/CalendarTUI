@@ -8,7 +8,6 @@
 			"timeMargins": [],
 			"eventStartDate": "2023-05-01T00:00:00",
 			"eventEndDate": "2050-01-01T07:40:00",
-			"isFullDay": false,
 			"repeatType": 1,
 			"selectedDates": []
 		}
@@ -22,7 +21,6 @@
 			"timeMargins": [],
 			"eventStartDate": "2023-01-05T07:40:00",
 			"eventEndDate": "2023-06-16T09:00:00",
-			"isFullDay": false,
 			"repeatType": 2,
 			"selectedDates": [
 				"2023-05-01T00:00:00",
@@ -42,7 +40,6 @@
 			"timeMargins": [],
 			"eventStartDate": "2023-01-05T09:00:00",
 			"eventEndDate": "2023-06-16T15:20:00",
-			"isFullDay": false,
 			"repeatType": 2,
 			"selectedDates": [
 				"2023-05-01T00:00:00",
@@ -62,11 +59,10 @@
 			"timeMargins": [],
 			"eventStartDate": "2023-05-09T18:00:00",
 			"eventEndDate": "2023-07-01T19:00:00",
-			"isFullDay": false,
 			"repeatType": 2,
 			"selectedDates": [
-				"2023-05-12T00:00:00",
-				"2023-05-16T00:00:00"
+				"2023-05-16T00:00:00",
+				"2023-05-12T00:00:00"
 			]
 		}
 	},
@@ -79,11 +75,10 @@
 			"timeMargins": [],
 			"eventStartDate": "2023-05-09T19:00:00",
 			"eventEndDate": "2023-07-01T20:00:00",
-			"isFullDay": false,
 			"repeatType": 2,
 			"selectedDates": [
-				"2023-05-12T00:00:00",
-				"2023-05-16T00:00:00"
+				"2023-05-16T00:00:00",
+				"2023-05-12T00:00:00"
 			]
 		}
 	}

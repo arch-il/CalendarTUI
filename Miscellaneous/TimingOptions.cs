@@ -17,7 +17,6 @@ public class TimingOptions
 	// time margins	
 	public DateTime eventStartDate { get; set; } // start date
 	public DateTime eventEndDate { get; set; }   // end date
-	public bool isFullDay { get; set; }          // full day events
 
 	// repeat parameters
 	public RepeatType repeatType { get; set; }        // repeat type
@@ -25,11 +24,10 @@ public class TimingOptions
 
 
 	// simple constructor
-	public TimingOptions(DateTime eventStartDate, DateTime eventEndDate, bool isFullDay, RepeatType repeatType, List<DateTime> selectedDates)
+	public TimingOptions(DateTime eventStartDate, DateTime eventEndDate, RepeatType repeatType, List<DateTime> selectedDates)
 	{
 		this.eventStartDate = eventStartDate;
 		this.eventEndDate = eventEndDate;
-		this.isFullDay = isFullDay;
 		this.repeatType = repeatType;
 		this.selectedDates = selectedDates;
 		timeMargins = new List<Tuple<DateTime, DateTime>>();

@@ -62,6 +62,7 @@ public static class GraphicsManager
 			CurrentTime.QueueEveryDraw();
 			CurrentEvent.QueueEveryDraw();
 			MainCalendar.UpdateIncrement();
+			Details.Initialize();
 		}
 	}
 

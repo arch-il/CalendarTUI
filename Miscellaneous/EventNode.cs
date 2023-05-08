@@ -22,4 +22,32 @@ public class EventNode
 		this.description = description;
 		this.timingOptions = timingOptions;
 	}
+
+	// empty constructor
+	public EventNode() { /* Empty */ }
+
+	
+	// custom equals operator
+	public static bool operator ==(EventNode a, EventNode b)
+	{
+		return a.title == b.title && 
+			   a.backgroundColor == b.backgroundColor &&
+			   a.foregroundColor == b.foregroundColor &&
+			   a.description == b.description &&
+			   a.timingOptions.eventStartDate == b.timingOptions.eventEndDate &&
+			   a.timingOptions.eventEndDate == b.timingOptions.eventEndDate &&
+			   a.timingOptions.repeatType == b.timingOptions.repeatType;
+	}
+
+	// custom does not equal operator
+	public static bool operator !=(EventNode a, EventNode b)
+	{
+		return a.title != b.title ||
+			   a.backgroundColor != b.backgroundColor ||
+			   a.foregroundColor != b.foregroundColor ||
+			   a.description != b.description ||
+			   a.timingOptions.eventStartDate != b.timingOptions.eventEndDate ||
+			   a.timingOptions.eventEndDate != b.timingOptions.eventEndDate ||
+			   a.timingOptions.repeatType != b.timingOptions.repeatType;
+	}
 }
