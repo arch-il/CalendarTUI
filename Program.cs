@@ -15,9 +15,6 @@ public class Program
 		// clear screen before starting drawing
 		Console.Clear();
 
-		// manually draw first time
-		Calendar.Draw();
-		
 		// game loop
 		while (true)
 		{
@@ -41,6 +38,8 @@ public class Program
 //! fix weekdays in repetition type in details module
 
 // todo:
+// todo: add "next event in:" in current event 
+
 // todo: fixed number times (15, 30, increment)
 
 // todo: remove magic numbers (add const numbers) 

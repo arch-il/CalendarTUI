@@ -258,7 +258,7 @@ public static class Details
 		if (tempMessage != "")
 		{
 			// draw desription
-			List<string> lines = ("Every: " + tempMessage).MakePassage(Calendar.borderRight - 2);
+			List<string> lines = ("Every: " + tempMessage).MakePassage(Calendar.borderRight - 1);
 			// check if there is passage to write
 			if (lines.Count > 1 || lines[0] != "Every: ")
 			{

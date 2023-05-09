@@ -416,8 +416,8 @@ public static class MainCalendar
 		drawCalls.Add(DrawLogo);
 		drawCalls.Add(DrawFrame);
 		drawCalls.Add(DrawTimes);
-		drawCalls.Add(DrawEvents);
 		drawCalls.Add(DrawDaySegments);
+		drawCalls.Add(DrawEvents);
 		drawCalls.Add(() => DrawCursorFrame(-1));
 		drawCalls.Add(() => DrawCursor(-1));
 		drawCalls.Add(DrawCurrentTime);
