@@ -35,7 +35,6 @@ public class Program
 //! make current time indicator cursor moving
 //! event sizes do not ailgn
 //! gap between events is not same
-//! fix weekdays in repetition type in details module
 
 // todo:
 // todo: add "next event in:" in current event 

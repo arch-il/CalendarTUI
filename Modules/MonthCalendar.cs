@@ -156,7 +156,11 @@ public static class MonthCalendar
 		// set starting date to 1st of current month
 		DateTime tempDate = new DateTime(MainCalendar.startDate.AddDays(MainCalendar.cursorPosition).Year, MainCalendar.startDate.AddDays(MainCalendar.cursorPosition).Month, 1);
 		// set starting date to monday
-		tempDate = tempDate.AddDays((int)DayOfWeek.Monday - (int)tempDate.DayOfWeek);
+		// check if its sunday
+		if (tempDate.DayOfWeek == DayOfWeek.Sunday)
+			tempDate = tempDate.AddDays(-6);
+		else
+			tempDate = tempDate.AddDays((int)DayOfWeek.Monday - (int)tempDate.DayOfWeek);
 		
 		// draw line by line
 		for (int i = 0; i < 6; i++)
