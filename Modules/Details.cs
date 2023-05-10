@@ -78,7 +78,7 @@ public static class Details
 			GraphicsManager.width - Calendar.borderRight + 1,
 			Calendar.borderTop + 11,
 			Calendar.borderRight,
-			28, //?
+			GraphicsManager.height - Calendar.borderTop - Calendar.borderBottom - 22,
 			ConsoleColor.Black,
 			ConsoleColor.DarkGray
 		);
@@ -105,7 +105,7 @@ public static class Details
 			GraphicsManager.width - Calendar.borderRight + 2,
 			Calendar.borderTop + 12,
 			Calendar.borderRight - 2,
-			26, //?
+			GraphicsManager.height - Calendar.borderTop - Calendar.borderBottom - 24,
 			ConsoleColor.Black
 		);
 

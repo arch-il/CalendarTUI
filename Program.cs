@@ -33,13 +33,11 @@ public class Program
 
 // ! issues:
 //! make current time indicator cursor moving
-//! event sizes do not ailgn
+//! event widths do not ailgn
 //! gap between events is not same
 
 // todo:
 // todo: add "next event in:" in current event 
-
-// todo: fixed number times (15, 30, increment)
 
 // todo: remove magic numbers (add const numbers) 
 // todo: make drawing more efficient (move every calculation to update)
