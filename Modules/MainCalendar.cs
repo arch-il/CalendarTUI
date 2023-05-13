@@ -633,8 +633,8 @@ public static class MainCalendar
 			{
 				// save temp numbers
 				int x = Calendar.borderLeft + 1 + sideGap + (timeMargin.Item1 - startDate).Days * (width + gapSize);
-				int y = Calendar.borderTop + 1 + (int)(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
-				int height = (int)Math.Round((timeMargin.Item2.TimeOfDay - timeMargin.Item1.TimeOfDay).TotalMinutes / increment);
+				int y = Calendar.borderTop + 1 + (int)Math.Round(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
+				int height = Calendar.borderTop + 1 + (int)Math.Round(timeMargin.Item2.TimeOfDay.TotalMinutes / increment) - y;
 				
 				// check if cursor is on top of this event
 				if (cursorX >= x && cursorX < x + width &&
@@ -685,9 +685,9 @@ public static class MainCalendar
 
 			// save temp numbers
 			int width = (frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount;
-			int height = (int)Math.Round((timeMargin.Item2.TimeOfDay - timeMargin.Item1.TimeOfDay).TotalMinutes / increment);
 			int x = Calendar.borderLeft + 1 + sideGap + (timeMargin.Item1 - startDate).Days * (width + gapSize);
-			int y = Calendar.borderTop + 1 + (int)(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
+			int y = Calendar.borderTop + 1 + (int)Math.Round(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
+			int height = Calendar.borderTop + 1 + (int)Math.Round(timeMargin.Item2.TimeOfDay.TotalMinutes / increment) - y;
 					
 			// draw arrows on sides
 			for (int i = 0; i < height; i++)
@@ -720,9 +720,9 @@ public static class MainCalendar
 
 			// save temp numbers
 			int width = (frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount;
-			int height = (int)Math.Round((timeMargin.Item2.TimeOfDay - timeMargin.Item1.TimeOfDay).TotalMinutes / increment);
 			int x = Calendar.borderLeft + 1 + sideGap + (timeMargin.Item1 - startDate).Days * (width + gapSize);
-			int y = Calendar.borderTop + 1 + (int)(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
+			int y = Calendar.borderTop + 1 + (int)Math.Round(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
+			int height = Calendar.borderTop + 1 + (int)Math.Round(timeMargin.Item2.TimeOfDay.TotalMinutes / increment) - y;
 					
 			// draw arrows on sides
 			for (int i = 0; i < height; i++)
