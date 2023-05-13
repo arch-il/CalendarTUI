@@ -10,6 +10,9 @@ public static class MainCalendar
 
 	// minute increment
 	private static double increment = 0;
+	
+	// saved time
+	private static DateTime savedTime = new DateTime();
 
 	// enum for View Mode
 	public enum View
@@ -81,8 +84,24 @@ public static class MainCalendar
 		QueueEveryDraw();
 	}
 	
+	// update using time
+	public static void Update()
+	{
+		// check if minute has changed
+		if (savedTime.Minute != DateTime.Now.Minute)
+		{
+			// update saved time
+			savedTime = DateTime.Now;
+
+			// check if time segment has changed
+			if (DateTime.Now.TimeOfDay.Minutes % Math.Round(increment) == 0)
+				// redraw everything
+				QueueEveryDraw();
+		}
+	}
+
 	// update using input
-	public static bool Update(ConsoleKey key)
+	public static void Update(ConsoleKey key)
 	{
 		switch(key)
 		{
@@ -92,7 +111,7 @@ public static class MainCalendar
 			{
 				// check if view is already set to day
 				if (currentView == View.Day)
-					return false;
+					return;
 				// update current view and segment count
 				currentView = View.Day;
 				segmentCount = 1;
@@ -114,7 +133,7 @@ public static class MainCalendar
 			{
 				// check if view is already set to four days
 				if (currentView == View.FourDays)
-					return false;
+					return;
 				// update current view and segment count	
 				currentView = View.FourDays;
 				segmentCount = 4;
@@ -136,7 +155,7 @@ public static class MainCalendar
 			{
 				// check if view is already set to week
 				if (currentView == View.Week)
-					return false;
+					return;
 				// update current view and segment count
 				currentView = View.Week;
 				segmentCount = 7;
@@ -161,11 +180,11 @@ public static class MainCalendar
 			{
 				// check if view and cursor is already on today
 				if (startDate == DateTime.Today && (cursorPosition == (DateTime.Today - startDate.Date).Days))
-					return false;
+					return;
 				// same thing but for week view
 				if (currentView == View.Week && (cursorPosition == (DateTime.Today - startDate.Date).Days) &&
 					DateTime.Today >= startDate && DateTime.Today < endDate)
-					return false;
+					return;
 				// set start date to today
 				startDate = DateTime.Today;
 				// if view is week move to monday
@@ -200,7 +219,7 @@ public static class MainCalendar
 			{
 				// check if any events are today
 				if (selectedEvent == -1)
-					return false;
+					return;
 				// check above current selected event
 				for (int i = selectedEvent-1; i >= 0; i--)
 					// check if that event ocurs today
@@ -213,17 +232,17 @@ public static class MainCalendar
 						// add required draw call
 						drawCalls.Add(() => DrawCursor(temp));
 						// return update status true
-						return true;
+						return;
 					}
 				// return update status false
-				return false;
+				return;
 			}
 			// move down
 			case ConsoleKey.N:
 			{
 				// check if any events are today
 				if (selectedEvent == -1)
-					return false;
+					return;
 				// check below current selected event
 				for (int i = selectedEvent+1; i < events.Count; i++)
 					// check if that event ocurs today
@@ -236,10 +255,10 @@ public static class MainCalendar
 						// add required draw call
 						drawCalls.Add(() => DrawCursor(temp));
 						// return update status true
-						return true;
+						return;
 					}
 				// return update status false
-				return false;
+				return;
 			}
 			
 			// date movements
@@ -402,9 +421,8 @@ public static class MainCalendar
 			events[i].timingOptions.timeMargins = events[i].timingOptions.GetTimeMargins(startDate, endDate);
 		// update selected event
 		UpdateSelectedEvent();
-		// return update status true
-		return true;
-	
+		// update using time
+		Update();
 	}
 
 	// update drawing options when window size chagnes

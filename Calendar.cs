@@ -81,7 +81,8 @@ public static class Calendar
 			return;
 		}
 		
-		// current time and event need to be updated anyways
+		// these need to be updated anyways
+		MainCalendar.Update();
 		CurrentTime.Update();
 		CurrentEvent.Update();
 	}
