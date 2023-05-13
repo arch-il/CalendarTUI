@@ -120,6 +120,8 @@ public static class MainCalendar
 				// check if cursor is still on screen
 				if (cursorPosition >= segmentCount-1)
 					cursorPosition = 0;
+				// update size
+				UpdateSize();
 				// add required draws to draw calls
 				drawCalls.Add(DrawDaySegments);
 				drawCalls.Add(DrawEvents);
@@ -142,6 +144,8 @@ public static class MainCalendar
 				// check if cursor is still on screen
 				if (cursorPosition >= segmentCount-1)
 					cursorPosition = 0;
+				// update size
+				UpdateSize();
 				// add required draws to draw calls
 				drawCalls.Add(DrawDaySegments);
 				drawCalls.Add(DrawEvents);
@@ -166,6 +170,8 @@ public static class MainCalendar
 				// check if cursor is still on screen
 				if (cursorPosition >= segmentCount-1)
 					cursorPosition = 0;
+				// update size
+				UpdateSize();
 				// add required draws to draw calls
 				drawCalls.Add(DrawDaySegments);
 				drawCalls.Add(DrawEvents);
@@ -438,7 +444,7 @@ public static class MainCalendar
 		// update frame width
 		frameWidth = GraphicsManager.width - Calendar.borderLeft - Calendar.borderRight;
 		// check if events align well
-		switch ((frameWidth-2 - 6*gapSize) % 7)
+		switch ((frameWidth-2 - (segmentCount-1)*gapSize) % segmentCount)
 		{
 			case 0:
 				break;
@@ -581,13 +587,13 @@ public static class MainCalendar
 			// check is cell date is today
 			if (cellDate == DateTime.Today)
 				// save cursorX
-				cursorX = Calendar.borderLeft + sideGap + i * ((frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount + gapSize) + 1;
+				cursorX = Calendar.borderLeft + sideGap + i * ((frameWidth - 2 - 2*sideGap - (segmentCount-1)*gapSize)/segmentCount + gapSize) + 1;
 			// draw date
 			GraphicsManager.DrawText(
 				cellDate.ToString("ddd dd.MM.yy").ToUpper(),
 				dateForegroundColor,
 				(cellDate == DateTime.Today ? ConsoleColor.DarkRed : ConsoleColor.Black),
-				Calendar.borderLeft + 1 + sideGap + i * ((frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount + gapSize) + (frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount/2 - 6,
+				Calendar.borderLeft + 1 + sideGap + i * ((frameWidth - 2 - 2*sideGap - (segmentCount-1)*gapSize)/segmentCount + gapSize) + (frameWidth - 2 - 2*sideGap - (segmentCount-1)*gapSize)/segmentCount/2 - 6,
 				0
 			);
 		}
@@ -597,7 +603,7 @@ public static class MainCalendar
 	public static void DrawCursorFrame(int prevCursorPosition = -1)
 	{
 		// temporarily save width
-		int width = (frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount;
+		int width = (frameWidth - 2 - 2*sideGap - (segmentCount-1)*gapSize)/segmentCount;
 
 		// check if previous cursor position has been supplied and is valid
 		if (prevCursorPosition >= 0)
@@ -642,7 +648,7 @@ public static class MainCalendar
 		);
 
 		// save event width
-		int width = (frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount;
+		int width = (frameWidth - 2 - 2*sideGap - (segmentCount-1)*gapSize)/segmentCount;
 		// draw each event occurences
 		foreach (var tempEvent in events)
 		{
@@ -702,7 +708,7 @@ public static class MainCalendar
 			var timeMargin = events[prevSelectedEvent].timingOptions.timeMargins.Find(x => x.Item1.Date == startDate.AddDays(cursorPosition));
 
 			// save temp numbers
-			int width = (frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount;
+			int width = (frameWidth - 2 - 2*sideGap - (segmentCount-1)*gapSize)/segmentCount;
 			int x = Calendar.borderLeft + 1 + sideGap + (timeMargin.Item1 - startDate).Days * (width + gapSize);
 			int y = Calendar.borderTop + 1 + (int)Math.Round(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
 			int height = Calendar.borderTop + 1 + (int)Math.Round(timeMargin.Item2.TimeOfDay.TotalMinutes / increment) - y;
@@ -737,7 +743,7 @@ public static class MainCalendar
 			var timeMargin = events[selectedEvent].timingOptions.timeMargins.Find(x => x.Item1.Date == startDate.AddDays(cursorPosition));
 
 			// save temp numbers
-			int width = (frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount;
+			int width = (frameWidth - 2 - 2*sideGap - (segmentCount-1)*gapSize)/segmentCount;
 			int x = Calendar.borderLeft + 1 + sideGap + (timeMargin.Item1 - startDate).Days * (width + gapSize);
 			int y = Calendar.borderTop + 1 + (int)Math.Round(timeMargin.Item1.TimeOfDay.TotalMinutes / increment);
 			int height = Calendar.borderTop + 1 + (int)Math.Round(timeMargin.Item2.TimeOfDay.TotalMinutes / increment) - y;
@@ -774,7 +780,7 @@ public static class MainCalendar
 		{
 			// draw cursor on screen
 			GraphicsManager.DrawText(
-				">" + new string('-', (frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount -1),
+				">" + new string('-', (frameWidth - 2 - 2*sideGap - (segmentCount-1)*gapSize)/segmentCount -1),
 				cursorForegroundColor,
 				cursorBackgroundColor,
 				cursorX,
