@@ -28,21 +28,20 @@ public class Program
 	}
 }
 
-
 //? inprogress:
+//! updates return bools
+// todo: remove magic numbers (add const numbers) 
+//! event heights do not ailgn
+//! gap between events is not same
+//! make current time indicator cursor moving
+// todo: update comments
 
 // ! issues:
-//! make current time indicator cursor moving
-//! event widths do not ailgn
-//! gap between events is not same
 
 // todo:
 // todo: add "next event in:" in current event 
 
-// todo: remove magic numbers (add const numbers) 
 // todo: make drawing more efficient (move every calculation to update)
-
-// todo: update comments
 
 // todo: add settings.json
 // todo: vim-mode

@@ -58,6 +58,7 @@ public static class GraphicsManager
 
 			// notify program that size has changed
 			MainCalendar.QueueEveryDraw();
+			MainCalendar.UpdateSize();
 			MonthCalendar.QueueEveryDraw();
 			CurrentTime.QueueEveryDraw();
 			CurrentEvent.QueueEveryDraw();
