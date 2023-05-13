@@ -32,7 +32,6 @@ public class Program
 //! updates return bools
 // todo: remove magic numbers (add const numbers) 
 //! event heights do not ailgn
-//! gap between events is not same
 //! make current time indicator cursor moving
 // todo: update comments
 

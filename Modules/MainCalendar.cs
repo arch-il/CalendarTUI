@@ -34,8 +34,8 @@ public static class MainCalendar
 	private static ConsoleColor cursorBackgroundColor = ConsoleColor.Black;
 
 	// drawing details
-	private static int frameWidth = -1; //?
-	private static int frameHeight = -1;
+	private static int frameWidth = -1; // width of frame around events
+	private static int frameHeight = -1; // height of frame around events
 	private static int gapSize = 1; // gap between events (default: 1)
 	private static int sideGap = 0; // gap between first/last event and edge (default: 0)
 
@@ -503,7 +503,7 @@ public static class MainCalendar
 		// temp date
 		DateTime tempTime = DateTime.Today;
 		// cycle thru dates
-		for (int j = 0; j < GraphicsManager.height - Calendar.borderTop - Calendar.borderBottom - 1; j++)
+		for (int j = 0; j < frameHeight - 1; j++)
 		{
 			if (DateTime.Now > tempTime.AddMinutes(increment*j) &&
 				DateTime.Now < tempTime.AddMinutes(increment*(j+1)))
@@ -563,13 +563,13 @@ public static class MainCalendar
 			// check is cell date is today
 			if (cellDate == DateTime.Today)
 				// save cursorX
-				cursorX = Calendar.borderLeft + i * (GraphicsManager.width - Calendar.borderLeft - Calendar.borderRight)/segmentCount +1;
+				cursorX = Calendar.borderLeft + sideGap + i * ((frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount + gapSize) + 1;
 			// draw date
 			GraphicsManager.DrawText(
 				cellDate.ToString("ddd dd.MM.yy").ToUpper(),
 				dateForegroundColor,
 				(cellDate == DateTime.Today ? ConsoleColor.DarkRed : ConsoleColor.Black),
-				Calendar.borderLeft + (2*i+1) * (GraphicsManager.width - Calendar.borderLeft - Calendar.borderRight)/segmentCount / 2 - 6,
+				Calendar.borderLeft + 1 + sideGap + i * ((frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount + gapSize) + (frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount/2 - 6,
 				0
 			);
 		}
@@ -590,7 +590,7 @@ public static class MainCalendar
 				Calendar.borderLeft + sideGap + prevCursorPosition * (width + gapSize),
 				Calendar.borderTop,
 				width + 2, 
-				GraphicsManager.height - Calendar.borderTop - Calendar.borderBottom,
+				frameHeight,
 				ConsoleColor.Black,
 				ConsoleColor.Black
 			);
@@ -605,7 +605,7 @@ public static class MainCalendar
 			Calendar.borderLeft + sideGap + cursorPosition * (width + gapSize),
 			Calendar.borderTop,
 			width + 2,
-			GraphicsManager.height - Calendar.borderTop - Calendar.borderBottom,
+			frameHeight,
 			ConsoleColor.Black,
 			ConsoleColor.DarkGreen
 		);
@@ -756,7 +756,7 @@ public static class MainCalendar
 		{
 			// draw cursor on screen
 			GraphicsManager.DrawText(
-				">" + new string('-', (GraphicsManager.width - Calendar.borderLeft - Calendar.borderRight)/segmentCount - 3),
+				">" + new string('-', (frameWidth - 2 - 2*sideGap - 6*gapSize)/segmentCount -1),
 				cursorForegroundColor,
 				cursorBackgroundColor,
 				cursorX,
@@ -784,6 +784,6 @@ public static class MainCalendar
 	public static void UpdateIncrement()
 	{
 		// update minute increment
-		increment = 1440.0 / (GraphicsManager.height - Calendar.borderTop - Calendar.borderBottom - 2);
+		increment = 1440.0 / (frameHeight - 2);
 	}
 }
