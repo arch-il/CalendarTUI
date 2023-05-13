@@ -29,7 +29,6 @@ public class Program
 }
 
 //? inprogress:
-//! make current time indicator cursor moving
 
 // ! issues:
 
