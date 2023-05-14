@@ -6,6 +6,7 @@ public class Program
 {
 	static void Main(string[] args)
 	{
+		System.Globalization.CultureInfo.CurrentCulture.ClearCachedData();
 		// initialize Graphics
 		GraphicsManager.InitializeGraphics();
 
